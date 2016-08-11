@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>新闻查询</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"  /> 
+	<link href="bootstrap3.34/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+	<link href="font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="jquery-jbox-2.3/2.3/Skins/Blue/jbox.css">
+	<link rel="stylesheet" type="text/css" href="jquery-validation/1.11.0/jquery.validate.css">
+	<link rel="stylesheet" href="common.css">
+	<link rel="stylesheet" href="base.css">
+	<link rel="stylesheet" href="addNews.css">
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script src="jquery-validation/1.11.0/jquery.validate.js"></script>
+	<!-- browser就是用来获取浏览器基本信息的。 -->
+	<script type="text/javascript" src="js/browser.js"></script>
+	<script src="bootstrap3.34/3.3.4/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="plupload-2.1.9/js/plupload.full.min.js"></script>
+ 	<script type="text/javascript" src="jquery-jbox-2.3/2.3/jquery.jBox-2.3.min.js"></script>
+ 	<script type="text/javascript" src="jquery-validation/1.11.0/additional-methods.js"></script>
+ 	<script src="jquery-validation/1.11.0/localization/messages_zh.js"></script>
+ 	<script type="text/javascript" src="jquery-jbox-2.3/2.3/i18n/jquery.jBox-zh-CN.js"></script>
+    <script type="text/javascript" src="js/shuiwu.js"></script>
+    <script type="text/javascript">
+    	
+    	
+    	jBoxConfig.defaults.top = '5%';
+    	$.jBox.setDefaults(jBoxConfig);
+    	
+    	function yuLan(){
+    		$.jBox.open("iframe:newsYuLan.html", "", 1200,
+                        550, {
+                            buttons : {},
+                            title: "新闻预览",
+                            closed: function () { 
+                               /* winReload();*/
+                            },
+                            loaded : function(h) {
+                                $(".jbox-content", top.document).css("overflow-y",
+                                        "hidden");
+                            }
+            });
+    	}
+    	function removeImg(obj){
+    		var imgName = $(obj).attr("name");
+    		$(obj).parent().parent().remove();
+    		$("#imgDIv img[id='"+imgName+"']").remove();
+    	}
+
+    </script>
+</head>
+<body>
+	<div class="topWrap">
+		<div class="top">
+			<div class="top-left">
+				<span id="nowDate"></span>
+			</div>	
+			<div class="top-right"> 
+				<span><a data-toggle="modal" data-target="#myModal" href="">登录</a></span>
+				<span><a href="">注册</a></span>
+			</div>
+		</div>
+	</div>
+	<div class="wrap">
+		<div class="wrap2">
+			<div class="channel">
+				<div>
+					<img style="repeat" src="indexImg/head.png" class="img-responsive" alt="海淀区管理系统">
+				</div>
+				<div class="channel-1">
+					<ul>
+						<li><span><a href="index.html">首　页</a></span></li>
+						<li><span><a href="reportManage.html">举报管理</a></span></li>
+						<li><span><a class="bgPadd" href="addNews.html">新闻管理</a></span></li>
+						<li><span><a href="policSelectA.html">政策法规管理</a></span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="center" >
+				<div class="center-left">
+					<div class="left-1"><i class="fa fa-star-o"></i>新闻管理</div>
+					<div class="left-2"><a class="btnPadd" href="addNews.html">添加新闻</a></div>
+					<div class="left-3"><a class="autoPadd" href="newsSelectA.html">新闻查询</a></div>
+				</div>
+				<form id="formId" method="post" enctype="multipart/form-data">
+					<div class="center-right">
+						<div class="reportBar">
+							<ul>
+								<li class="report-li1"><a href="#"><i class="fa fa-play-circle-o" style="margin-right:0.3em;"></i>新闻管理</a></li>
+								<li class="report-li2">></li>
+								<li ><a href="#">添加新闻</a></li>
+							</ul>
+						</div>
+						<div class="reportInfo">
+							<div class="info-1">
+								<label class="label-1">新闻信息</label>
+							</div>
+							<div class="info-2">
+								<label class="label-2" >新闻标题:</label>
+								<input id="newsTitle" class="inputLen mL2" type="text" name="newsTitle">
+							</div>
+    						<div class="info-3">
+								<label  class="label-3" >新闻内容:</label>
+								<textarea id="newsContent" name="newsContent" class="textarea-1"></textarea>
+							</div>
+							<div class="info-2" id="filelist">
+								<label class="label-2">上传图片:</label>
+								<span id="fileP1">
+							       <button type="button" id="browse" class="selectImg">
+							       	<i class="fa fa-file-image-o"></i>&nbsp;选择图片
+							       </button>
+							    </span>
+							   <div class="info-2 info-4">
+							   		<table id="imgtable" class="imgtable">
+							   			<tbody>
+
+							   			</tbody>
+							   		</table>
+							   </div>
+							</div>
+							<div id="imgDIv"></div>
+							<div class="form-btn" >
+								<button id="yulanCon" class="btn btn-info" onclick="yuLan()" type="button">
+									<i class="fa fa-file-picture-o"></i>&nbsp;&nbsp;预　览
+								</button>
+								<button class="btn btn-primary" id="start_upload">
+									<i class="fa fa-floppy-o"></i>&nbsp;&nbsp;提　交
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>	
+			</div>
+			<div class="bottom">
+				<span>版权所有：北京市海淀区水政管理中心</span>
+				<span>京ICP备05083640号</span>
+			</div>
+		</div>
+	</div>	
+	<script>
+		//实例化一个plupload上传对象
+	    var uploader = new plupload.Uploader({
+	        browse_button : 'browse', //触发文件选择对话框的按钮，为那个元素id
+	        url : 'demo.html', //服务器端的上传页面地址
+	        filters:{
+	        	mime_type :[
+	        		{title : '图片类型', extensions: "jpg,gif,png"}
+	        	],
+	        	max_file_size : '10mb',
+	        	prevent_duplicates : true //不允许选取重复文件
+	        }
+	    });
+
+	     //在实例对象上调用init()方法进行初始化
+    	uploader.init();
+    	//绑定上传图片事件
+	    uploader.bind('FilesAdded',function(uploader,files){
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var html = 
+						'<tr>'+
+							'<td width="40%">'+
+							 	file_name+ ' (' + plupload.formatSize(files[i].size) + ') <b></b>'+
+							'</td>'+
+							'<td width="40%">'+
+							 	'<input style="width:15em;" type="text" placeholder="请附加标题">'+
+							'</td>'+
+							'<td style="padding-left: 2em;">'+
+							 	'<i onclick="removeImg(this)" name="'+files[i].id+'" class="fa fa-trash-o"><i>'+
+							'</td>'+
+						'</tr>';
+				$(html).appendTo('#imgtable');
+				//给图片src进行隐藏赋值
+				!function(i){
+					previewImage(files[i],function(imgsrc){
+						$('#imgDIv').append('<img id="'+files[i].id+'" style="display:none;" src="'+ imgsrc +'" alt="'+file_name+'"/>');
+					});
+			    }(i);
+			}
+	    });
+	 	//绑定上传图片的事件
+	    /*uploader.bind('UploadProgress',function(uploader,file){
+	      document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+	      
+	    });*/
+		//最后给"开始上传"按钮注册事件
+		document.getElementById('start_upload').onclick = function(){
+		    uploader.start(); //调用实例对象的start()方法开始上传文件，当然你也可以在其他地方调用该方法
+		}
+		$("#formId").validate({
+				rules: {
+				   newsTitle: {
+				   	 required: true,
+				   	 maxlength: 30
+				   },
+				   newsContent: "required",
+				},
+				submitHandler: function(form){
+					alert("开始提交表单");
+					//调用实例对象的start()方法开始上传文件
+					uploader.start();
+					form.submit();
+				}
+
+		});
+	</script>
+</body>
+</html>

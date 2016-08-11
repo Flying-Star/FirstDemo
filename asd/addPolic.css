@@ -1,0 +1,38 @@
+
+.info-2{
+	width: 100%;
+	height: auto;
+	background-color: #F0F0F0;
+	margin-top: 4px;
+}
+
+.selectImg{
+	width: 9em;
+	height: 30px;
+	background: #339cff;
+	color: white;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+}
+.imgtable{
+	margin-bottom: 11px;
+	width: 35em;
+	margin-left: 10.8em;
+	border: 1px solid #bfbfbf;
+	background-color: #fff;
+}
+.imgtable tr{
+	
+	border: 1px dashed #e8e7e7;
+
+}
+.imgtable tr td{
+	
+	padding: 5px;
+}
+.form-btn{
+	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
